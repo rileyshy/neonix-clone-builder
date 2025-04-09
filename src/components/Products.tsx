@@ -6,25 +6,25 @@ import { ArrowRight, Check } from 'lucide-react';
 const products = [
   {
     id: 1,
-    title: "Neonix Dashboard",
-    description: "Complete admin dashboard with analytics, charts, and data visualization tools.",
-    features: ["50+ UI Components", "10 Dashboard layouts", "Light/Dark mode", "Data visualization"],
+    title: "Custom Designs",
+    description: "Professional logos, banners, and graphics for FiveM servers and Discord communities.",
+    features: ["Custom Logos", "FiveM/Discord Banners", "GFX Pack", "Chain Pack"],
     image: "/placeholder.svg",
     color: "purple",
   },
   {
     id: 2,
-    title: "Neonix Landing",
-    description: "Beautiful landing page templates to showcase your products and services.",
-    features: ["20+ Page templates", "Animation library", "SEO optimized", "Conversion focused"],
+    title: "Discord Services",
+    description: "Upgrade your Discord experience with affordable Nitro and server boosts.",
+    features: ["Cheap Nitro", "Server Boosts", "Custom Bot Source Codes", "Bot Hosting (CM Hosting)"],
     image: "/placeholder.svg",
     color: "blue",
   },
   {
     id: 3,
-    title: "Neonix Commerce",
-    description: "Complete e-commerce solution with product listings, cart and checkout.",
-    features: ["Product catalog", "Shopping cart", "Payment integration", "Order management"],
+    title: "Development Resources",
+    description: "Learn to create and manage your FiveM server with professional resources and courses.",
+    features: ["FiveM Development Courses", "Server Bundles", "Website Creation", "Professional Support"],
     image: "/placeholder.svg",
     color: "cyan",
   },
@@ -41,10 +41,10 @@ const Products = () => {
         {/* Section header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our Digital <span className="neon-text-blue">Products</span>
+            Our <span className="neon-text-blue">Services</span>
           </h2>
           <p className="text-xl text-gray-300">
-            Premium UI kits and templates for your next digital project
+            Premium products and services for gamers and content creators
           </p>
         </div>
         

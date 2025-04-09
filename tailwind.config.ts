@@ -63,12 +63,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Neon theme colors
+				// Neon theme colors - updated for CM Store
 				neon: {
-					purple: '#F81CE5',
+					purple: '#9b87f5', // More purple theme for CM Store
 					blue: '#0070F3',
 					cyan: '#00DFD8',
-					pink: '#FF4D4D',
+					pink: '#FF4D4D', // Added for CM Store branding
 					yellow: '#F5A623',
 					dark: '#0F0F12',
 					darker: '#090909',
@@ -104,10 +104,10 @@ export default {
 				},
 				'glow': {
 					'0%, 100%': { 
-						textShadow: '0 0 8px rgba(248, 28, 229, 0.6), 0 0 12px rgba(248, 28, 229, 0.4)'
+						textShadow: '0 0 8px rgba(155, 135, 245, 0.6), 0 0 12px rgba(155, 135, 245, 0.4)'
 					},
 					'50%': { 
-						textShadow: '0 0 16px rgba(248, 28, 229, 0.8), 0 0 20px rgba(248, 28, 229, 0.6)' 
+						textShadow: '0 0 16px rgba(155, 135, 245, 0.8), 0 0 20px rgba(155, 135, 245, 0.6)' 
 					}
 				},
 				'float': {
@@ -123,7 +123,7 @@ export default {
 				'float': 'float 6s ease-in-out infinite'
 			},
 			boxShadow: {
-				'neon-purple': '0 0 10px rgba(248, 28, 229, 0.5), 0 0 20px rgba(248, 28, 229, 0.3)',
+				'neon-purple': '0 0 10px rgba(155, 135, 245, 0.5), 0 0 20px rgba(155, 135, 245, 0.3)',
 				'neon-blue': '0 0 10px rgba(0, 112, 243, 0.5), 0 0 20px rgba(0, 112, 243, 0.3)',
 				'neon-cyan': '0 0 10px rgba(0, 223, 216, 0.5), 0 0 20px rgba(0, 223, 216, 0.3)',
 			},

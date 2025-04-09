@@ -5,37 +5,37 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    quote: "Neonix has transformed how we build interfaces. The components are beautiful and the documentation is excellent.",
-    author: "Alex Johnson",
-    title: "Front-end Developer",
-    company: "TechCore",
+    quote: "The logo they designed for my FiveM server was incredible. Professional quality at an affordable price.",
+    author: "Alex M.",
+    title: "FiveM Server Owner",
+    company: "Los Santos RP",
     avatar: "/placeholder.svg",
     rating: 5
   },
   {
     id: 2,
-    quote: "We've saved countless development hours using Neonix. Our customers love the modern look and feel of our product.",
-    author: "Sarah Williams",
-    title: "UI/UX Designer",
-    company: "DesignLabs",
+    quote: "Got Discord Nitro at half the regular price, delivery was instant. Will definitely be using their services again!",
+    author: "Sarah K.",
+    title: "Discord Community Manager",
+    company: "Gaming Guild",
     avatar: "/placeholder.svg",
     rating: 5
   },
   {
     id: 3,
-    quote: "The support team is incredibly responsive and the product quality is outstanding. Worth every penny.",
-    author: "Michael Chen",
-    title: "Product Manager",
-    company: "Innotech",
+    quote: "Their FiveM development course helped me build my server from scratch. The support team was always available to answer questions.",
+    author: "Michael R.",
+    title: "Developer",
+    company: "Horizon RP",
     avatar: "/placeholder.svg",
     rating: 4
   },
   {
     id: 4,
-    quote: "Neonix allowed us to launch our SaaS product in half the time we planned. The code quality is superb.",
-    author: "Emily Rodriguez",
-    title: "CTO",
-    company: "LaunchPad",
+    quote: "The custom bot they developed for my server works flawlessly. Hosting is reliable and the price can't be beat.",
+    author: "Emily T.",
+    title: "Community Admin",
+    company: "Tech Talks",
     avatar: "/placeholder.svg",
     rating: 5
   }
@@ -54,7 +54,7 @@ const Testimonials = () => {
             What Our <span className="neon-text-blue">Customers</span> Say
           </h2>
           <p className="text-xl text-gray-300">
-            Join hundreds of satisfied developers and designers
+            Join hundreds of satisfied gamers and content creators
           </p>
         </div>
         
@@ -105,14 +105,16 @@ const Testimonials = () => {
         {/* CTA banner */}
         <div className="mt-20 glass-card-highlight p-10 text-center rounded-2xl max-w-4xl mx-auto border-neon-blue/30">
           <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-text-blue animate-pulse-slow">
-            Ready to elevate your digital product?
+            Ready to upgrade your Discord and FiveM experience?
           </h3>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of developers building amazing interfaces with Neonix
+            Join our Discord community today and get access to exclusive deals and premium services
           </p>
-          <button className="neon-button text-lg px-10 py-4">
-            Get Started Today
-          </button>
+          <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
+            <button className="neon-button text-lg px-10 py-4">
+              Join Our Discord
+            </button>
+          </a>
         </div>
       </div>
     </section>

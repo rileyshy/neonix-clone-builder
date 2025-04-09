@@ -5,46 +5,45 @@ import { Check } from 'lucide-react';
 
 const pricingPlans = [
   {
-    name: "Basic",
-    description: "For individuals and small projects",
-    price: "49",
+    name: "Design",
+    description: "Custom graphics for your brand",
+    price: "10",
     features: [
-      "50+ UI Components",
-      "5 Page Templates",
-      "Basic Documentation",
-      "Community Support",
-      "3 Months Updates"
+      "Custom Logo Design",
+      "Discord Banner",
+      "FiveM Server Banner",
+      "1 Free Revision",
+      "24-48 Hour Delivery"
     ],
     color: "default",
     popular: false
   },
   {
-    name: "Pro",
-    description: "For professional developers",
-    price: "99",
+    name: "Discord",
+    description: "Boost your Discord experience",
+    price: "8",
     features: [
-      "150+ UI Components",
-      "20 Page Templates",
-      "Extensive Documentation",
+      "Monthly Nitro",
+      "Server Boosts",
+      "Custom Bot Development",
+      "Bot Hosting",
       "Priority Support",
-      "1 Year Updates",
-      "Source Files Included"
+      "Instant Delivery"
     ],
     color: "purple",
     popular: true
   },
   {
-    name: "Enterprise",
-    description: "For large teams and organizations",
-    price: "249",
+    name: "Development",
+    description: "FiveM server resources",
+    price: "25",
     features: [
-      "250+ UI Components",
-      "Unlimited Page Templates",
-      "Expert Documentation",
-      "24/7 Support",
-      "Lifetime Updates",
-      "Source Files Included",
-      "Custom Implementation"
+      "FiveM Development Course",
+      "Server Setup Guide",
+      "Custom Script Package",
+      "1-on-1 Support",
+      "Website Development",
+      "Lifetime Updates"
     ],
     color: "blue",
     popular: false
@@ -62,10 +61,10 @@ const Pricing = () => {
         {/* Section header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Simple, Transparent <span className="neon-text-purple">Pricing</span>
+            Affordable <span className="neon-text-purple">Pricing</span>
           </h2>
           <p className="text-xl text-gray-300">
-            Choose the perfect plan for your project
+            Quality services that won't break the bank
           </p>
         </div>
         
@@ -110,7 +109,7 @@ const Pricing = () => {
                   <div className={`text-5xl font-bold mb-2 ${priceClass}`}>
                     ${plan.price}
                   </div>
-                  <p className="text-gray-400">per license</p>
+                  <p className="text-gray-400">starting from</p>
                 </div>
                 
                 <ul className="space-y-4 mb-8">
@@ -124,9 +123,11 @@ const Pricing = () => {
                   ))}
                 </ul>
                 
-                <Button className={`w-full py-6 ${buttonClass}`}>
-                  Get Started
-                </Button>
+                <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
+                  <Button className={`w-full py-6 ${buttonClass}`}>
+                    Get Started
+                  </Button>
+                </a>
               </div>
             );
           })}
@@ -135,7 +136,7 @@ const Pricing = () => {
         {/* Additional info */}
         <div className="mt-12 text-center">
           <p className="text-gray-400">
-            All plans include a 14-day money-back guarantee and lifetime access.
+            Join our Discord for custom quotes and special bundle deals.
           </p>
         </div>
       </div>

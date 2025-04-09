@@ -13,14 +13,14 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="flex items-center">
-              <span className="text-2xl font-bold neon-text-purple">Neonix</span>
+              <span className="text-2xl font-bold neon-text-blue">CM Store</span>
             </a>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
-              <a href="#products" className="text-gray-300 hover:text-white transition-colors">Products</a>
+              <a href="#products" className="text-gray-300 hover:text-white transition-colors">Services</a>
               <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
               <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
               <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Reviews</a>
@@ -29,7 +29,9 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="neon-button">Get Started</Button>
+            <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
+              <Button className="neon-button">Join Discord</Button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -53,7 +55,7 @@ const Navbar = () => {
               className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white"
               onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              Services
             </a>
             <a 
               href="#features" 
@@ -77,7 +79,9 @@ const Navbar = () => {
               Reviews
             </a>
             <div className="pt-2">
-              <Button className="neon-button w-full">Get Started</Button>
+              <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
+                <Button className="neon-button w-full">Join Discord</Button>
+              </a>
             </div>
           </div>
         </div>

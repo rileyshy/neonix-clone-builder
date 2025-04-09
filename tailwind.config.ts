@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Neon theme colors
+				neon: {
+					purple: '#F81CE5',
+					blue: '#0070F3',
+					cyan: '#00DFD8',
+					pink: '#FF4D4D',
+					yellow: '#F5A623',
+					dark: '#0F0F12',
+					darker: '#090909',
+					darkgray: '#151518',
+					gray: '#888888',
 				}
 			},
 			borderRadius: {
@@ -84,11 +97,40 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'glow': {
+					'0%, 100%': { 
+						textShadow: '0 0 8px rgba(248, 28, 229, 0.6), 0 0 12px rgba(248, 28, 229, 0.4)'
+					},
+					'50%': { 
+						textShadow: '0 0 16px rgba(248, 28, 229, 0.8), 0 0 20px rgba(248, 28, 229, 0.6)' 
+					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite'
+			},
+			boxShadow: {
+				'neon-purple': '0 0 10px rgba(248, 28, 229, 0.5), 0 0 20px rgba(248, 28, 229, 0.3)',
+				'neon-blue': '0 0 10px rgba(0, 112, 243, 0.5), 0 0 20px rgba(0, 112, 243, 0.3)',
+				'neon-cyan': '0 0 10px rgba(0, 223, 216, 0.5), 0 0 20px rgba(0, 223, 216, 0.3)',
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'neon-grid': 'linear-gradient(to right, #151518 1px, transparent 1px), linear-gradient(to bottom, #151518 1px, transparent 1px)',
 			}
 		}
 	},

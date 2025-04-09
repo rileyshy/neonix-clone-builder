@@ -23,6 +23,7 @@ const Navbar = () => {
               <a href="#products" className="text-gray-300 hover:text-white transition-colors">Services</a>
               <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
               <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
+              <a href="#downloads" className="text-gray-300 hover:text-white transition-colors">Downloads</a>
               <a href="#payment" className="text-gray-300 hover:text-white transition-colors">Support</a>
               <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Reviews</a>
             </div>
@@ -71,6 +72,13 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
+            </a>
+            <a 
+              href="#downloads" 
+              className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Downloads
             </a>
             <a 
               href="#payment" 

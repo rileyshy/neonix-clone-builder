@@ -35,6 +35,30 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     return false;
   }
+
+  // Prevent Shift+Ctrl+I, Shift+Command+I (inspect element)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I')) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Prevent Shift+Ctrl+C, Shift+Command+C (inspect element / select element)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'c' || e.key === 'C')) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Prevent Shift+Ctrl+J, Shift+Command+J (open console)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'j' || e.key === 'J')) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Prevent Alt+Command+I (Safari dev tools)
+  if (e.altKey && e.metaKey && (e.key === 'i' || e.key === 'I')) {
+    e.preventDefault();
+    return false;
+  }
 });
 
 // Disable text selection
@@ -88,4 +112,30 @@ window.addEventListener('beforeunload', (e) => {
   return '';
 });
 
-console.log('Anti-save protection enabled');
+// Detect DevTools opening
+const devToolsDetector = () => {
+  const widthThreshold = window.outerWidth - window.innerWidth > 160;
+  const heightThreshold = window.outerHeight - window.innerHeight > 160;
+  
+  if (widthThreshold || heightThreshold) {
+    document.body.innerHTML = '<h1>Developer Tools detected. This action is not allowed.</h1>';
+  }
+};
+
+// Check continuously
+setInterval(devToolsDetector, 1000);
+
+// Also detect via console debugging
+const consoleDetector = () => {
+  const devtools = /./;
+  devtools.toString = () => {
+    document.body.innerHTML = '<h1>Console activity detected. This action is not allowed.</h1>';
+    return '';
+  };
+  console.log('%c', devtools);
+};
+
+// Run console detector
+consoleDetector();
+
+console.log('Enhanced anti-save and anti-dev-tools protection enabled');

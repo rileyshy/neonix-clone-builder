@@ -16,12 +16,1856 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@cmstore" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <style>
+      :root {
+        --neon-purple: #9b87f5;
+        --neon-blue: #0070F3;
+        --neon-cyan: #00DFD8;
+        --neon-pink: #FF4D4D;
+        --neon-yellow: #F5A623;
+        --neon-dark: #0F0F12;
+        --neon-darker: #090909;
+        --neon-darkgray: #151518;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+          Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        background-color: var(--neon-dark);
+        color: #fff;
+        line-height: 1.6;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background-color: rgba(9, 9, 9, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4rem;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--neon-blue);
+        text-shadow: 0 0 8px rgba(0, 112, 243, 0.6), 0 0 12px rgba(0, 112, 243, 0.4);
+        text-decoration: none;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .nav-links a {
+        color: #aaa;
+        text-decoration: none;
+        margin: 0 1rem;
+        transition: color 0.3s;
+      }
+      
+      .nav-links a:hover {
+        color: #fff;
+      }
+      
+      .discord-btn {
+        background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .discord-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(155, 135, 245, 0.5), 0 0 20px rgba(155, 135, 245, 0.3);
+      }
+      
+      .menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: #aaa;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      
+      @media (min-width: 768px) {
+        .nav-links {
+          display: flex;
+        }
+        .menu-btn {
+          display: none;
+        }
+      }
+      
+      /* Mobile menu */
+      .mobile-menu {
+        background-color: rgba(9, 9, 9, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        display: none;
+      }
+      
+      .mobile-menu.active {
+        display: block;
+      }
+      
+      .mobile-menu a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #aaa;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .mobile-menu a:hover {
+        color: #fff;
+      }
+      
+      /* Hero Section */
+      .hero {
+        padding-top: 8rem;
+        padding-bottom: 3rem;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), var(--neon-dark)),
+          repeating-linear-gradient(
+            to right,
+            #151518 1px,
+            transparent 1px
+          ),
+          repeating-linear-gradient(
+            to bottom,
+            #151518 1px,
+            transparent 1px
+          );
+        background-size: cover, 40px 40px, 40px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 5rem;
+        left: 10%;
+        width: 8rem;
+        height: 8rem;
+        background-color: rgba(0, 112, 243, 0.2);
+        border-radius: 50%;
+        filter: blur(5rem);
+      }
+      
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 5rem;
+        right: 10%;
+        width: 8rem;
+        height: 8rem;
+        background-color: rgba(255, 77, 77, 0.2);
+        border-radius: 50%;
+        filter: blur(5rem);
+      }
+      
+      .hero-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero-badge span {
+        margin-left: 0.5rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero h1 .neon-blue {
+        color: var(--neon-blue);
+        text-shadow: 0 0 8px rgba(0, 112, 243, 0.6), 0 0 12px rgba(0, 112, 243, 0.4);
+      }
+      
+      .hero h1 .neon-purple {
+        color: var(--neon-purple);
+        text-shadow: 0 0 8px rgba(155, 135, 245, 0.6), 0 0 12px rgba(155, 135, 245, 0.4);
+      }
+      
+      .hero p {
+        font-size: 1.125rem;
+        color: #aaa;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .buttons {
+        margin-bottom: 4rem;
+      }
+      
+      .primary-btn {
+        background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: inline-block;
+        margin: 0.5rem;
+      }
+      
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(155, 135, 245, 0.5), 0 0 20px rgba(155, 135, 245, 0.3);
+      }
+      
+      .secondary-btn {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        display: inline-block;
+        margin: 0.5rem;
+      }
+      
+      .secondary-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Feature cards */
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      @media (min-width: 768px) {
+        .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .hero h1 {
+          font-size: 3.5rem;
+        }
+      }
+      
+      .glass-card {
+        background-color: rgba(21, 21, 24, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        transition: transform 0.3s;
+      }
+      
+      .glass-card:hover {
+        transform: translateY(-0.5rem);
+      }
+      
+      .icon-circle {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      
+      .blue-icon {
+        background-color: rgba(0, 112, 243, 0.1);
+        color: var(--neon-blue);
+      }
+      
+      .purple-icon {
+        background-color: rgba(155, 135, 245, 0.1);
+        color: var(--neon-purple);
+      }
+      
+      .cyan-icon {
+        background-color: rgba(0, 223, 216, 0.1);
+        color: var(--neon-cyan);
+      }
+      
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .card-text {
+        color: #aaa;
+        font-size: 0.875rem;
+      }
+      
+      /* Section styling */
+      section {
+        padding: 5rem 0;
+        position: relative;
+      }
+      
+      .section-darker {
+        background-color: var(--neon-darker);
+      }
+      
+      .section-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      
+      .section-desc {
+        font-size: 1.125rem;
+        color: #aaa;
+      }
+      
+      .neon-cyan {
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px rgba(0, 223, 216, 0.6), 0 0 12px rgba(0, 223, 216, 0.4);
+      }
+      
+      /* Products grid */
+      .products-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      @media (min-width: 768px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      .product-image {
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .product-content {
+        padding: 1.5rem;
+      }
+      
+      .product-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+      
+      .product-desc {
+        color: #ddd;
+        margin-bottom: 1rem;
+      }
+      
+      .feature-list {
+        list-style: none;
+        margin-bottom: 1.5rem;
+      }
+      
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      
+      .feature-icon {
+        margin-right: 0.5rem;
+        color: var(--neon-purple);
+      }
+      
+      /* Features section */
+      .features-section .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      @media (min-width: 768px) {
+        .features-section .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      .stats-card {
+        margin-top: 6rem;
+        background-color: rgba(21, 21, 24, 0.8);
+        border: 1px solid rgba(155, 135, 245, 0.2);
+        border-radius: 0.75rem;
+        padding: 2rem;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      @media (min-width: 768px) {
+        .stats-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      .stat {
+        text-align: center;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      
+      .stat-label {
+        color: #aaa;
+      }
+      
+      /* Pricing section */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      @media (min-width: 768px) {
+        .pricing-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      .price-card {
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+      }
+      
+      .popular-badge {
+        position: absolute;
+        top: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--neon-purple);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 1rem;
+        border-radius: 9999px;
+      }
+      
+      .price-card-highlight {
+        background-image: linear-gradient(to bottom right, rgba(21, 21, 24, 0.9), rgba(0, 0, 0, 0.7));
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(155, 135, 245, 0.3);
+      }
+      
+      .price-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .price-desc {
+        color: #aaa;
+        margin-bottom: 1.5rem;
+      }
+      
+      .price-amount {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      
+      .price-period {
+        color: #aaa;
+        margin-bottom: 2rem;
+      }
+      
+      .price-features {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+      
+      .price-feature {
+        display: flex;
+        align-items: start;
+        margin-bottom: 1rem;
+      }
+      
+      .price-feature-icon {
+        margin-right: 0.75rem;
+        margin-top: 0.25rem;
+      }
+      
+      /* Download section */
+      .downloads-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      @media (min-width: 768px) {
+        .downloads-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      .download-card {
+        padding: 1.5rem;
+      }
+      
+      .download-header {
+        display: flex;
+        margin-bottom: 1.5rem;
+      }
+      
+      .download-icon {
+        width: 4rem;
+        height: 4rem;
+        background-color: rgba(21, 21, 24, 0.8);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+      }
+      
+      .download-info h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      
+      .download-meta {
+        font-size: 0.875rem;
+        color: #aaa;
+      }
+      
+      .download-desc {
+        color: #ddd;
+        margin-bottom: 1.5rem;
+      }
+      
+      /* Payment section */
+      .payment-card {
+        max-width: 32rem;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      
+      .payment-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      
+      .payment-icon {
+        width: 4rem;
+        height: 4rem;
+        background-color: rgba(155, 135, 245, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        color: var(--neon-purple);
+      }
+      
+      .payment-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .payment-desc {
+        color: #ddd;
+      }
+      
+      .payment-details {
+        margin-bottom: 2rem;
+      }
+      
+      .payment-row {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .paypal-button {
+        display: block;
+        width: 100%;
+        background-color: #0070ba;
+        color: #fff;
+        padding: 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      .paypal-button:hover {
+        background-color: #005ea6;
+      }
+      
+      .payment-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: #aaa;
+        margin-top: 1rem;
+      }
+      
+      /* Testimonials section */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      @media (min-width: 768px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      .testimonial-card {
+        padding: 2rem;
+      }
+      
+      .rating {
+        display: flex;
+        margin-bottom: 1.5rem;
+      }
+      
+      .star {
+        color: var(--neon-yellow);
+        margin-right: 0.25rem;
+      }
+      
+      .quote {
+        font-size: 1.125rem;
+        font-style: italic;
+        color: #ddd;
+        margin-bottom: 1.5rem;
+      }
+      
+      .author-info {
+        display: flex;
+        align-items: center;
+      }
+      
+      .author-avatar {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .author-name {
+        font-weight: 600;
+      }
+      
+      .author-title {
+        font-size: 0.875rem;
+        color: #aaa;
+      }
+      
+      .cta-card {
+        margin-top: 5rem;
+        text-align: center;
+        padding: 2.5rem;
+        background-image: linear-gradient(to bottom right, rgba(21, 21, 24, 0.9), rgba(0, 0, 0, 0.7));
+        border: 1px solid rgba(0, 112, 243, 0.3);
+        border-radius: 1rem;
+        max-width: 64rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .cta-title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--neon-blue);
+        margin-bottom: 1rem;
+        text-shadow: 0 0 8px rgba(0, 112, 243, 0.6), 0 0 12px rgba(0, 112, 243, 0.4);
+      }
+      
+      .cta-text {
+        font-size: 1.125rem;
+        color: #ddd;
+        max-width: 36rem;
+        margin: 0 auto 2rem;
+      }
+      
+      /* Footer */
+      footer {
+        background-color: var(--neon-darker);
+        padding: 4rem 0 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+      }
+      
+      .footer-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--neon-purple);
+        margin-bottom: 1rem;
+        display: inline-block;
+        text-decoration: none;
+        text-shadow: 0 0 8px rgba(155, 135, 245, 0.6), 0 0 12px rgba(155, 135, 245, 0.4);
+      }
+      
+      .footer-about {
+        color: #aaa;
+        margin-bottom: 1rem;
+      }
+      
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .social-link {
+        color: #aaa;
+        transition: color 0.3s;
+      }
+      
+      .social-link:hover {
+        color: #fff;
+      }
+      
+      .footer-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      
+      .footer-links {
+        list-style: none;
+      }
+      
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .footer-links a {
+        color: #aaa;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      
+      .footer-links a:hover {
+        color: #fff;
+      }
+      
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
+      
+      .copyright {
+        color: #aaa;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+      
+      @media (min-width: 768px) {
+        .copyright {
+          margin-bottom: 0;
+        }
+      }
+      
+      .footer-nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+      
+      .footer-nav a {
+        color: #aaa;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      
+      .footer-nav a:hover {
+        color: #fff;
+      }
+      
+      /* Icons */
+      .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        vertical-align: middle;
+      }
+      
+      .icon-sm {
+        width: 1em;
+        height: 1em;
+      }
+      
+      .icon-md {
+        width: 1.5em;
+        height: 1.5em;
+      }
+      
+      .icon-lg {
+        width: 2em;
+        height: 2em;
+      }
+    </style>
   </head>
-
   <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Navigation -->
+    <nav>
+      <div class="container">
+        <div class="navbar">
+          <a href="#" class="logo">CM Store</a>
+          
+          <div class="nav-links">
+            <a href="#products">Services</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#downloads">Downloads</a>
+            <a href="#payment">Support</a>
+            <a href="#testimonials">Reviews</a>
+          </div>
+          
+          <a href="https://discord.gg/cmstore" target="_blank" class="discord-btn">Join Discord</a>
+          
+          <button class="menu-btn">☰</button>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Mobile menu, hidden by default -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#products">Services</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#payment">Support</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="https://discord.gg/cmstore" target="_blank">Join Discord</a>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+            <span>Welcome to CM Store</span>
+          </div>
+          
+          <h1>
+            Custom <span class="neon-blue">Designs</span> & <br>
+            Discord <span class="neon-purple">Services</span>
+          </h1>
+          
+          <p>
+            Get amazing logos, Discord Nitro & boosts at unbeatable prices.
+            Professional services for gamers and content creators.
+          </p>
+          
+          <div class="buttons">
+            <a href="#products" class="primary-btn">
+              Browse Services
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="https://discord.gg/cmstore" target="_blank" class="secondary-btn">Join Discord</a>
+          </div>
+          
+          <!-- Feature highlights -->
+          <div class="features-grid">
+            <div class="glass-card">
+              <div class="icon-circle blue-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="19.5" cy="12.5" r="2.5" />
+                  <circle cx="12.5" cy="19.5" r="2.5" />
+                  <circle cx="4.5" cy="12.5" r="2.5" />
+                  <circle cx="12.5" cy="4.5" r="2.5" />
+                  <path d="M4.5 12.5L12.5 4.5" />
+                  <path d="M12.5 19.5L19.5 12.5" />
+                  <path d="M12.5 4.5L19.5 12.5" />
+                  <path d="M4.5 12.5L12.5 19.5" />
+                </svg>
+              </div>
+              <h3 class="card-title">Custom Designs</h3>
+              <p class="card-text">Professional logos and banners for your brand and servers.</p>
+            </div>
+            
+            <div class="glass-card">
+              <div class="icon-circle purple-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              </div>
+              <h3 class="card-title">Discord Services</h3>
+              <p class="card-text">Affordable Nitro and server boosts to enhance your Discord experience.</p>
+            </div>
+            
+            <div class="glass-card">
+              <div class="icon-circle cyan-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="19" y1="12" x2="5" y2="12" />
+                </svg>
+              </div>
+              <h3 class="card-title">Development Resources</h3>
+              <p class="card-text">FiveM courses, bot source codes and professional hosting services.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section id="products" class="section-darker">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Our <span class="neon-blue">Services</span>
+          </h2>
+          <p class="section-desc">
+            Premium products and services for gamers and content creators
+          </p>
+        </div>
+        
+        <div class="products-grid">
+          <div class="glass-card">
+            <div class="product-image">
+              <img src="/placeholder.svg" alt="Custom Designs">
+            </div>
+            <div class="product-content">
+              <h3 class="product-title neon-purple">Custom Designs</h3>
+              <p class="product-desc">
+                Professional logos, banners, and graphics for FiveM servers and Discord communities.
+              </p>
+              
+              <ul class="feature-list">
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Custom Logos</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>FiveM/Discord Banners</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>GFX Pack</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Chain Pack</span>
+                </li>
+              </ul>
+              
+              <a href="#" class="primary-btn">
+                View Details
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div class="glass-card">
+            <div class="product-image">
+              <img src="/placeholder.svg" alt="Discord Services">
+            </div>
+            <div class="product-content">
+              <h3 class="product-title neon-blue">Discord Services</h3>
+              <p class="product-desc">
+                Upgrade your Discord experience with affordable Nitro and server boosts.
+              </p>
+              
+              <ul class="feature-list">
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Cheap Nitro</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Server Boosts</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Custom Bot Source Codes</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Bot Hosting (CM Hosting)</span>
+                </li>
+              </ul>
+              
+              <a href="#" class="primary-btn">
+                View Details
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div class="glass-card">
+            <div class="product-image">
+              <img src="/placeholder.svg" alt="Development Resources">
+            </div>
+            <div class="product-content">
+              <h3 class="product-title neon-cyan">Development Resources</h3>
+              <p class="product-desc">
+                Learn to create and manage your FiveM server with professional resources and courses.
+              </p>
+              
+              <ul class="feature-list">
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>FiveM Development Courses</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Server Bundles</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Website Creation</span>
+                </li>
+                <li class="feature-item">
+                  <svg class="feature-icon icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Professional Support</span>
+                </li>
+              </ul>
+              
+              <a href="#" class="primary-btn">
+                View Details
+                <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Why Choose <span class="neon-cyan">CM Store</span>
+          </h2>
+          <p class="section-desc">
+            Top-quality services with unbeatable prices and support
+          </p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="19.5" cy="12.5" r="2.5" />
+                <circle cx="12.5" cy="19.5" r="2.5" />
+                <circle cx="4.5" cy="12.5" r="2.5" />
+                <circle cx="12.5" cy="4.5" r="2.5" />
+                <path d="M4.5 12.5L12.5 4.5" />
+                <path d="M12.5 19.5L19.5 12.5" />
+                <path d="M12.5 4.5L19.5 12.5" />
+                <path d="M4.5 12.5L12.5 19.5" />
+              </svg>
+            </div>
+            <h3 class="card-title">Professional Design</h3>
+            <p class="card-text">Custom-made logos and banners created by experienced designers for your brand.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <h3 class="card-title">Fast Delivery</h3>
+            <p class="card-text">Quick turnaround times for all services, ensuring you get what you need when you need it.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+                <line x1="19" y1="12" x2="5" y2="12" />
+              </svg>
+            </div>
+            <h3 class="card-title">Development Resources</h3>
+            <p class="card-text">Comprehensive courses and source codes to help you build your FiveM server.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
+              </svg>
+            </div>
+            <h3 class="card-title">Affordable Pricing</h3>
+            <p class="card-text">Budget-friendly Discord Nitro and server boosts that won't break the bank.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <h3 class="card-title">Community Support</h3>
+            <p class="card-text">Join our friendly Discord community for assistance and networking opportunities.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="icon-circle purple-icon">
+              <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <h3 class="card-title">Quality Guaranteed</h3>
+            <p class="card-text">All our products and services are tested and reviewed to ensure the highest quality.</p>
+          </div>
+        </div>
+        
+        <div class="stats-card">
+          <div class="stats-grid">
+            <div class="stat">
+              <div class="stat-number neon-purple">500+</div>
+              <div class="stat-label">Satisfied Customers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number neon-blue">1000+</div>
+              <div class="stat-label">Custom Designs Delivered</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number neon-cyan">24/7</div>
+              <div class="stat-label">Community Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-darker">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Affordable <span class="neon-purple">Pricing</span>
+          </h2>
+          <p class="section-desc">
+            Quality services that won't break the bank
+          </p>
+        </div>
+        
+        <div class="pricing-grid">
+          <div class="glass-card price-card">
+            <h3 class="price-name">Design</h3>
+            <p class="price-desc">Custom graphics for your brand</p>
+            <div class="price-amount">$10</div>
+            <div class="price-period">starting from</div>
+            
+            <ul class="price-features">
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Custom Logo Design</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Discord Banner</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>FiveM Server Banner</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>1 Free Revision</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>24-48 Hour Delivery</span>
+              </li>
+            </ul>
+            
+            <a href="https://discord.gg/cmstore" class="primary-btn">Get Started</a>
+          </div>
+          
+          <div class="glass-card price-card price-card-highlight">
+            <div class="popular-badge">MOST POPULAR</div>
+            <h3 class="price-name">Discord</h3>
+            <p class="price-desc">Boost your Discord experience</p>
+            <div class="price-amount neon-purple">$8</div>
+            <div class="price-period">starting from</div>
+            
+            <ul class="price-features">
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Monthly Nitro</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Server Boosts</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Custom Bot Development</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Bot Hosting</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Priority Support</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-purple">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Instant Delivery</span>
+              </li>
+            </ul>
+            
+            <a href="https://discord.gg/cmstore" class="primary-btn">Get Started</a>
+          </div>
+          
+          <div class="glass-card price-card">
+            <h3 class="price-name">Development</h3>
+            <p class="price-desc">FiveM server resources</p>
+            <div class="price-amount neon-blue">$25</div>
+            <div class="price-period">starting from</div>
+            
+            <ul class="price-features">
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>FiveM Development Course</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Server Setup Guide</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Custom Script Package</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>1-on-1 Support</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Website Development</span>
+              </li>
+              <li class="price-feature">
+                <span class="price-feature-icon">
+                  <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-blue">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span>Lifetime Updates</span>
+              </li>
+            </ul>
+            
+            <a href="https://discord.gg/cmstore" class="primary-btn">Get Started</a>
+          </div>
+        </div>
+        
+        <div class="section-header" style="margin-top: 3rem;">
+          <p class="section-desc">
+            Join our Discord for custom quotes and special bundle deals.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Downloads Section -->
+    <section id="downloads" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Free <span class="neon-text-cyan">Downloads</span>
+          </h2>
+          <p class="section-desc">
+            Get started with our free resources and templates
+          </p>
+        </div>
+        
+        <div class="downloads-grid">
+          <div class="glass-card download-card">
+            <div class="download-header">
+              <div class="download-icon">
+                <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="#00DFD8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+              <div class="download-info">
+                <h3>GFX Design Pack</h3>
+                <p class="download-meta">156 MB • ZIP</p>
+              </div>
+            </div>
+            
+            <p class="download-desc">
+              Professional templates for logos, banners, and graphics
+            </p>
+            
+            <a href="#" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Now
+            </a>
+          </div>
+          
+          <div class="glass-card download-card">
+            <div class="download-header">
+              <div class="download-icon">
+                <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="#0070F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <rect x="8" y="12" width="8" height="2" />
+                  <rect x="8" y="16" width="8" height="2" />
+                  <rect x="8" y="8" width="2" height="2" />
+                </svg>
+              </div>
+              <div class="download-info">
+                <h3>Chain Pack Templates</h3>
+                <p class="download-meta">89 MB • RAR</p>
+              </div>
+            </div>
+            
+            <p class="download-desc">
+              Premium templates to create your own custom chains
+            </p>
+            
+            <a href="#" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Now
+            </a>
+          </div>
+          
+          <div class="glass-card download-card">
+            <div class="download-header">
+              <div class="download-icon">
+                <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                </svg>
+              </div>
+              <div class="download-info">
+                <h3>Sound Effects Pack</h3>
+                <p class="download-meta">45 MB • ZIP</p>
+              </div>
+            </div>
+            
+            <p class="download-desc">
+              High-quality audio effects for content creation
+            </p>
+            
+            <a href="#" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Now
+            </a>
+          </div>
+        </div>
+        
+        <div class="section-header" style="margin-top: 3rem;">
+          <p class="section-desc">
+            Join our Discord for even more free resources and premium content.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Payment Section -->
+    <section id="payment" class="section-darker">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Support <span class="neon-blue">CM Store</span>
+          </h2>
+          <p class="section-desc">
+            Get premium services with convenient payment options
+          </p>
+        </div>
+        
+        <div class="glass-card payment-card">
+          <div class="payment-header">
+            <div class="payment-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
+                <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
+                <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z" />
+              </svg>
+            </div>
+            <h3 class="payment-title">Recurring Support</h3>
+            <p class="payment-desc">Get access to our premium services with convenient recurring payments</p>
+          </div>
+          
+          <div class="payment-details">
+            <div class="payment-row">
+              <span>Monthly access</span>
+              <span class="font-semibold">Starting at $10</span>
+            </div>
+            <div class="payment-row">
+              <span>Premium support</span>
+              <span class="font-semibold">Included</span>
+            </div>
+            <div class="payment-row">
+              <span>Exclusive content</span>
+              <span class="font-semibold">Included</span>
+            </div>
+          </div>
+          
+          <a href="https://paypal.me/ukendzsupport" target="_blank" rel="noopener noreferrer" class="paypal-button">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+            Pay with PayPal
+          </a>
+          
+          <p class="payment-note">
+            Secure payments processed by PayPal
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            What Our <span class="neon-blue">Customers</span> Say
+          </h2>
+          <p class="section-desc">
+            Join hundreds of satisfied gamers and content creators
+          </p>
+        </div>
+        
+        <div class="testimonials-grid">
+          <div class="glass-card testimonial-card">
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            
+            <blockquote class="quote">
+              "The logo they designed for my FiveM server was incredible. Professional quality at an affordable price."
+            </blockquote>
+            
+            <div class="author-info">
+              <div class="author-avatar">
+                <img src="/placeholder.svg" alt="Alex M.">
+              </div>
+              <div>
+                <div class="author-name">Alex M.</div>
+                <div class="author-title">FiveM Server Owner, Los Santos RP</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-card testimonial-card">
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            
+            <blockquote class="quote">
+              "Got Discord Nitro at half the regular price, delivery was instant. Will definitely be using their services again!"
+            </blockquote>
+            
+            <div class="author-info">
+              <div class="author-avatar">
+                <img src="/placeholder.svg" alt="Sarah K.">
+              </div>
+              <div>
+                <div class="author-name">Sarah K.</div>
+                <div class="author-title">Discord Community Manager, Gaming Guild</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-card testimonial-card">
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="color: #888;">☆</span>
+            </div>
+            
+            <blockquote class="quote">
+              "Their FiveM development course helped me build my server from scratch. The support team was always available to answer questions."
+            </blockquote>
+            
+            <div class="author-info">
+              <div class="author-avatar">
+                <img src="/placeholder.svg" alt="Michael R.">
+              </div>
+              <div>
+                <div class="author-name">Michael R.</div>
+                <div class="author-title">Developer, Horizon RP</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-card testimonial-card">
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            
+            <blockquote class="quote">
+              "The custom bot they developed for my server works flawlessly. Hosting is reliable and the price can't be beat."
+            </blockquote>
+            
+            <div class="author-info">
+              <div class="author-avatar">
+                <img src="/placeholder.svg" alt="Emily T.">
+              </div>
+              <div>
+                <div class="author-name">Emily T.</div>
+                <div class="author-title">Community Admin, Tech Talks</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cta-card">
+          <h3 class="cta-title">
+            Ready to upgrade your Discord and FiveM experience?
+          </h3>
+          <p class="cta-text">
+            Join our Discord community today and get access to exclusive deals and premium services
+          </p>
+          <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer" class="primary-btn">
+            Join Our Discord
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="#" class="footer-logo">CM Store</a>
+            <p class="footer-about">
+              Premium services and resources for gamers and content creators.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg class="icon icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="footer-title">Products</h3>
+            <ul class="footer-links">
+              <li><a href="#">Custom Designs</a></li>
+              <li><a href="#">Discord Services</a></li>
+              <li><a href="#">Development Resources</a></li>
+              <li><a href="#">FiveM Resources</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="footer-title">Resources</h3>
+            <ul class="footer-links">
+              <li><a href="#">Downloads</a></li>
+              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Discord</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="footer-title">Company</h3>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p class="copyright">
+            &copy; 2025 CM Store. All rights reserved.
+          </p>
+          
+          <div class="footer-nav">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- Basic JavaScript for the mobile menu toggle -->
+    <script>
+      const menuBtn = document.querySelector('.menu-btn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking on a link
+      const mobileLinks = document.querySelectorAll('.mobile-menu a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+        });
+      });
+    </script>
   </body>
 </html>

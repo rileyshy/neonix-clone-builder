@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Shield } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,8 +29,12 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <a href="/admin" className="flex items-center text-gray-300 hover:text-white">
+              <Shield size={18} className="mr-1" />
+              Admin
+            </a>
             <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
               <Button className="neon-button">Join Discord</Button>
             </a>
@@ -93,6 +97,14 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Reviews
+            </a>
+            <a 
+              href="/admin" 
+              className="block px-3 py-2 text-base font-medium text-neon-purple hover:text-white flex items-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Shield size={18} className="mr-2" />
+              Admin
             </a>
             <div className="pt-2">
               <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">

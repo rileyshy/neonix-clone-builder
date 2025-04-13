@@ -6,6 +6,11 @@ import { Menu, X, Shield } from 'lucide-react';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Open the standalone admin panel
+  const openAdminPanel = () => {
+    window.open('/admin-panel/index.html', '_blank');
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-neon-darker/80 backdrop-blur-lg border-b border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,10 +36,10 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="/admin" className="flex items-center text-gray-300 hover:text-white">
+            <button onClick={openAdminPanel} className="flex items-center text-gray-300 hover:text-white">
               <Shield size={18} className="mr-1" />
               Admin
-            </a>
+            </button>
             <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
               <Button className="neon-button">Join Discord</Button>
             </a>
@@ -98,14 +103,16 @@ const Navbar = () => {
             >
               Reviews
             </a>
-            <a 
-              href="/admin" 
-              className="block px-3 py-2 text-base font-medium text-neon-purple hover:text-white flex items-center"
-              onClick={() => setIsMenuOpen(false)}
+            <button 
+              className="block px-3 py-2 text-base font-medium text-neon-purple hover:text-white flex items-center w-full text-left"
+              onClick={() => {
+                setIsMenuOpen(false);
+                openAdminPanel();
+              }}
             >
               <Shield size={18} className="mr-2" />
               Admin
-            </a>
+            </button>
             <div className="pt-2">
               <a href="https://discord.gg/cmstore" target="_blank" rel="noopener noreferrer">
                 <Button className="neon-button w-full">Join Discord</Button>

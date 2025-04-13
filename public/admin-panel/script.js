@@ -42,10 +42,28 @@ document.addEventListener("DOMContentLoaded", function() {
   ];
   
   const products = [
-    { id: 1, name: "CM Protection Plus", price: "$49.99", status: "Active" },
-    { id: 2, name: "CM Protection Basic", price: "$29.99", status: "Active" },
-    { id: 3, name: "CM Protection Enterprise", price: "$69.99", status: "Inactive" }
+    { id: 1, name: "CM Protection Plus", price: "£49.99", stock: 25, status: "Active", category: "Protection" },
+    { id: 2, name: "CM Protection Basic", price: "£29.99", stock: 50, status: "Active", category: "Protection" },
+    { id: 3, name: "Custom Logo Design", price: "£19.99", stock: 999, status: "Active", category: "Custom Designs" },
+    { id: 4, name: "Discord Nitro (1 Month)", price: "£7.99", stock: 35, status: "Active", category: "Discord Services" },
+    { id: 5, name: "FiveM Development Course", price: "£59.99", stock: 10, status: "Active", category: "Development Resources" },
+    { id: 6, name: "CM Protection Enterprise", price: "£69.99", stock: 0, status: "Inactive", category: "Protection" }
   ];
+
+  // Save products to localStorage
+  if (!localStorage.getItem('cmstore_products')) {
+    localStorage.setItem('cmstore_products', JSON.stringify(products));
+  }
+
+  // Load products from localStorage
+  function loadProducts() {
+    return JSON.parse(localStorage.getItem('cmstore_products')) || [];
+  }
+
+  // Save products to localStorage
+  function saveProducts(products) {
+    localStorage.setItem('cmstore_products', JSON.stringify(products));
+  }
 
   // Populate users table
   const usersTableBody = document.getElementById("users-table-body");
@@ -65,21 +83,73 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Populate products table
-  const productsTableBody = document.getElementById("products-table-body");
-  products.forEach(product => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${product.id}</td>
-      <td>${product.name}</td>
-      <td>${product.price}</td>
-      <td><span class="status-${product.status.toLowerCase()}">${product.status}</span></td>
-      <td>
-        <button class="btn-edit" data-id="${product.id}">Edit</button>
-        <button class="btn-delete" data-id="${product.id}">Delete</button>
-      </td>
-    `;
-    productsTableBody.appendChild(row);
-  });
+  function populateProductsTable() {
+    const productsTableBody = document.getElementById("products-table-body");
+    productsTableBody.innerHTML = '';
+    
+    const currentProducts = loadProducts();
+    
+    currentProducts.forEach(product => {
+      const stockStatus = product.stock > 0 ? 
+        `<span class="stock-status stock-in">${product.stock} in stock</span>` : 
+        `<span class="stock-status stock-out">Out of stock</span>`;
+        
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.category || 'Uncategorized'}</td>
+        <td>${product.price}</td>
+        <td>${stockStatus}</td>
+        <td><span class="status-${product.status.toLowerCase()}">${product.status}</span></td>
+        <td>
+          <button class="btn-edit" data-id="${product.id}">Edit</button>
+          <button class="btn-delete" data-id="${product.id}">Delete</button>
+        </td>
+      `;
+      productsTableBody.appendChild(row);
+    });
+
+    // Re-attach event listeners
+    attachProductButtonListeners();
+  }
+
+  // Attach event listeners to product table buttons
+  function attachProductButtonListeners() {
+    // Edit product buttons
+    document.querySelectorAll("#products-table-body .btn-edit").forEach(button => {
+      button.addEventListener("click", function() {
+        const id = parseInt(this.getAttribute("data-id"));
+        const products = loadProducts();
+        const product = products.find(p => p.id === id);
+        
+        if (product) {
+          document.getElementById("product-modal-title").textContent = "Edit Product";
+          document.getElementById("product-id").value = product.id;
+          document.getElementById("product-name").value = product.name;
+          document.getElementById("product-category").value = product.category || '';
+          document.getElementById("product-price").value = product.price.replace('£', '');
+          document.getElementById("product-stock").value = product.stock;
+          document.getElementById("product-status").value = product.status;
+          productModal.classList.add("show");
+        }
+      });
+    });
+
+    // Delete product buttons
+    document.querySelectorAll("#products-table-body .btn-delete").forEach(button => {
+      button.addEventListener("click", function() {
+        const id = parseInt(this.getAttribute("data-id"));
+        const products = loadProducts();
+        const updatedProducts = products.filter(p => p.id !== id);
+        
+        saveProducts(updatedProducts);
+        populateProductsTable();
+        
+        showToast(`Product #${id} deleted successfully`);
+      });
+    });
+  }
 
   // Modal functionality
   const userModal = document.getElementById("user-modal");
@@ -100,6 +170,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Add product button
   addProductBtn.addEventListener("click", function() {
     document.getElementById("product-modal-title").textContent = "Add Product";
+    document.getElementById("product-id").value = "";
+    document.getElementById("product-name").value = "";
+    document.getElementById("product-category").value = "";
+    document.getElementById("product-price").value = "";
+    document.getElementById("product-stock").value = "0";
+    document.getElementById("product-status").value = "Active";
     productModal.classList.add("show");
   });
 
@@ -112,30 +188,21 @@ document.addEventListener("DOMContentLoaded", function() {
     productModal.classList.remove("show");
   });
 
-  // Edit buttons
-  document.querySelectorAll(".btn-edit").forEach(button => {
+  // Edit buttons for users
+  document.querySelectorAll("#users-table-body .btn-edit").forEach(button => {
     button.addEventListener("click", function() {
       const id = this.getAttribute("data-id");
-      
-      if (this.closest("#users-table-body")) {
-        document.getElementById("user-modal-title").textContent = "Edit User";
-        userModal.classList.add("show");
-      } else if (this.closest("#products-table-body")) {
-        document.getElementById("product-modal-title").textContent = "Edit Product";
-        productModal.classList.add("show");
-      }
-      
-      // In a real app, you would fetch the data for the specific ID here
-      showToast(`Editing item #${id}`);
+      document.getElementById("user-modal-title").textContent = "Edit User";
+      userModal.classList.add("show");
+      showToast(`Editing user #${id}`);
     });
   });
 
-  // Delete buttons
-  document.querySelectorAll(".btn-delete").forEach(button => {
+  // Delete buttons for users
+  document.querySelectorAll("#users-table-body .btn-delete").forEach(button => {
     button.addEventListener("click", function() {
       const id = this.getAttribute("data-id");
-      showToast(`Deleted item #${id}`);
-      // In a real app, you would send a delete request and remove the row
+      showToast(`Deleted user #${id}`);
     });
   });
 
@@ -148,8 +215,51 @@ document.addEventListener("DOMContentLoaded", function() {
 
   productForm.addEventListener("submit", function(e) {
     e.preventDefault();
+    
+    // Get form values
+    const id = document.getElementById("product-id").value;
+    const name = document.getElementById("product-name").value;
+    const category = document.getElementById("product-category").value;
+    const priceValue = document.getElementById("product-price").value;
+    const stock = parseInt(document.getElementById("product-stock").value) || 0;
+    const status = document.getElementById("product-status").value;
+    
+    // Format price with pound symbol
+    const price = `£${parseFloat(priceValue).toFixed(2)}`;
+    
+    const products = loadProducts();
+    
+    if (id) {
+      // Update existing product
+      const index = products.findIndex(p => p.id === parseInt(id));
+      if (index !== -1) {
+        products[index] = {
+          ...products[index],
+          name,
+          category,
+          price,
+          stock,
+          status
+        };
+      }
+      showToast("Product updated successfully");
+    } else {
+      // Add new product
+      const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+      products.push({
+        id: newId,
+        name,
+        category,
+        price,
+        stock,
+        status
+      });
+      showToast("Product added successfully");
+    }
+    
+    saveProducts(products);
+    populateProductsTable();
     productModal.classList.remove("show");
-    showToast("Product saved successfully");
   });
 
   // Toast functionality
@@ -174,4 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
       productModal.classList.remove("show");
     }
   });
+  
+  // Initialize products table
+  populateProductsTable();
 });

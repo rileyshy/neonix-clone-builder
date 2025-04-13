@@ -23,7 +23,7 @@ const Admin = () => {
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>User management</li>
-              <li>Product management</li>
+              <li>Product management (Add, Edit, Remove Products, Set Stock Levels)</li>
               <li>Store statistics</li>
               <li>Protection settings</li>
             </ul>

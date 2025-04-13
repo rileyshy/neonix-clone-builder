@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CM Store Admin Panel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="neon-text-blue">CM Store Admin</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-button active" data-tab="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-button" data-tab="users">
+          <i data-lucide="users"></i>
+          <span>Users</span>
+        </button>
+        <button class="nav-button" data-tab="products">
+          <i data-lucide="package"></i>
+          <span>Products</span>
+        </button>
+        <button class="nav-button" data-tab="settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </button>
+        <div class="sidebar-footer">
+          <button class="nav-button" id="back-to-site">
+            <i data-lucide="log-out"></i>
+            <span>Back to Site</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-header">
+      <button id="mobile-menu-toggle">
+        <i data-lucide="menu"></i>
+      </button>
+      <h2 class="neon-text-blue">CM Store Admin</h2>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Dashboard Tab -->
+      <div class="tab-content active" id="dashboard-tab">
+        <h1 class="page-title">Dashboard</h1>
+        
+        <div class="stat-grid">
+          <div class="stat-card">
+            <h2 class="stat-title">Total Users</h2>
+            <p class="stat-value neon-text-blue">3</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="stat-title">Total Products</h2>
+            <p class="stat-value neon-text-cyan">3</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="stat-title">Active Products</h2>
+            <p class="stat-value neon-text-purple">2</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="stat-title">Total Revenue</h2>
+            <p class="stat-value text-green">$149.97</p>
+          </div>
+        </div>
+
+        <div class="highlight-card">
+          <div class="alert-header">
+            <i data-lucide="alert-triangle" class="text-purple"></i>
+            <h2>Anti-Save Protection Active</h2>
+          </div>
+          <p class="text-gray">
+            Your website is protected against saving attempts with our enhanced security measures.
+          </p>
+          <ul class="feature-list">
+            <li>Protected against right-clicking</li>
+            <li>Disabled keyboard save shortcuts</li>
+            <li>Prevented text selection</li>
+            <li>Blocked developer tools access</li>
+            <li>Image drag protection</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Users Tab -->
+      <div class="tab-content" id="users-tab">
+        <div class="tab-header">
+          <h1 class="page-title">Users Management</h1>
+          <button class="neon-button" id="add-user-btn">
+            <i data-lucide="plus"></i>
+            Add User
+          </button>
+        </div>
+
+        <div class="card table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body">
+              <!-- User rows will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Products Tab -->
+      <div class="tab-content" id="products-tab">
+        <div class="tab-header">
+          <h1 class="page-title">Products Management</h1>
+          <button class="neon-button" id="add-product-btn">
+            <i data-lucide="plus"></i>
+            Add Product
+          </button>
+        </div>
+
+        <div class="card table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body">
+              <!-- Product rows will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div class="tab-content" id="settings-tab">
+        <h1 class="page-title">Settings</h1>
+        
+        <div class="card settings-card">
+          <h2>Protection Settings</h2>
+          
+          <div class="settings-list">
+            <div class="setting-item">
+              <div class="setting-content">
+                <h3>Block Right-Click</h3>
+                <p>Prevents users from right-clicking on your website.</p>
+              </div>
+              <div class="setting-status enabled">Enabled</div>
+            </div>
+            
+            <div class="setting-item">
+              <div class="setting-content">
+                <h3>Block Developer Tools</h3>
+                <p>Prevents users from opening browser developer tools.</p>
+              </div>
+              <div class="setting-status enabled">Enabled</div>
+            </div>
+            
+            <div class="setting-item">
+              <div class="setting-content">
+                <h3>Block Text Selection</h3>
+                <p>Prevents users from selecting text on your website.</p>
+              </div>
+              <div class="setting-status enabled">Enabled</div>
+            </div>
+            
+            <div class="setting-item">
+              <div class="setting-content">
+                <h3>Clear Clipboard</h3>
+                <p>Periodically clears the user's clipboard.</p>
+              </div>
+              <div class="setting-status enabled">Enabled</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for editing users -->
+  <div class="modal" id="user-modal">
+    <div class="modal-content">
+      <h2 id="user-modal-title">Edit User</h2>
+      <form id="user-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role">
+            <option value="Admin">Admin</option>
+            <option value="Moderator">Moderator</option>
+            <option value="User">User</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancel-user-btn">Cancel</button>
+          <button type="submit" class="neon-button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for editing products -->
+  <div class="modal" id="product-modal">
+    <div class="modal-content">
+      <h2 id="product-modal-title">Edit Product</h2>
+      <form id="product-form">
+        <div class="form-group">
+          <label for="product-name">Product Name</label>
+          <input type="text" id="product-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="text" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancel-product-btn">Cancel</button>
+          <button type="submit" class="neon-button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden">
+    <div class="toast-content"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

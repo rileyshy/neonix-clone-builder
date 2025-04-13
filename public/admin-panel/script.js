@@ -1,390 +1,177 @@
 
-// Initialize Lucide icons
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", function() {
+  // Initialize Lucide icons
   lucide.createIcons();
 
-  // Initial tab
-  setActiveTab('dashboard');
-
-  // Sidebar navigation
-  const navButtons = document.querySelectorAll('.nav-button[data-tab]');
+  // Tab navigation
+  const navButtons = document.querySelectorAll(".nav-button");
+  const tabContents = document.querySelectorAll(".tab-content");
+  
   navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const tabId = button.getAttribute('data-tab');
-      setActiveTab(tabId);
+    button.addEventListener("click", function() {
+      const tabId = this.getAttribute("data-tab");
+      
+      // Remove active class from all buttons and tabs
+      navButtons.forEach(btn => btn.classList.remove("active"));
+      tabContents.forEach(tab => tab.classList.remove("active"));
+      
+      // Add active class to current button and tab
+      this.classList.add("active");
+      document.getElementById(`${tabId}-tab`).classList.add("active");
     });
   });
 
   // Mobile menu toggle
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const sidebar = document.querySelector('.sidebar');
+  const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+  const sidebar = document.querySelector(".sidebar");
   
-  mobileMenuToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    
-    // Change icon based on sidebar state
-    const icon = sidebar.classList.contains('active') ? 'x' : 'menu';
-    mobileMenuToggle.innerHTML = '';
-    const newIcon = document.createElement('i');
-    newIcon.setAttribute('data-lucide', icon);
-    mobileMenuToggle.appendChild(newIcon);
-    lucide.createIcons();
+  mobileMenuToggle.addEventListener("click", function() {
+    sidebar.classList.toggle("show");
   });
 
   // Back to site button
-  document.getElementById('back-to-site').addEventListener('click', () => {
-    window.location.href = '/';
+  document.getElementById("back-to-site").addEventListener("click", function() {
+    window.location.href = "/";
   });
 
-  // Initialize users table
-  initUsers();
+  // Sample data for tables
+  const users = [
+    { id: 1, username: "admin", email: "admin@cmstore.com", role: "Admin" },
+    { id: 2, username: "moderator", email: "mod@cmstore.com", role: "Moderator" },
+    { id: 3, username: "user1", email: "user1@example.com", role: "User" }
+  ];
   
-  // Initialize products table
-  initProducts();
-  
-  // Setup user form
-  const userForm = document.getElementById('user-form');
-  userForm.addEventListener('submit', handleUserSubmit);
-  
-  // Setup product form
-  const productForm = document.getElementById('product-form');
-  productForm.addEventListener('submit', handleProductSubmit);
-  
-  // Setup modal close buttons
-  document.getElementById('cancel-user-btn').addEventListener('click', () => {
-    toggleModal('user-modal', false);
-  });
-  
-  document.getElementById('cancel-product-btn').addEventListener('click', () => {
-    toggleModal('product-modal', false);
-  });
-  
-  // Add new user button
-  document.getElementById('add-user-btn').addEventListener('click', () => {
-    currentUserId = null;
-    document.getElementById('user-modal-title').textContent = 'Add User';
-    document.getElementById('user-form').reset();
-    toggleModal('user-modal', true);
-  });
-  
-  // Add new product button
-  document.getElementById('add-product-btn').addEventListener('click', () => {
-    currentProductId = null;
-    document.getElementById('product-modal-title').textContent = 'Add Product';
-    document.getElementById('product-form').reset();
-    toggleModal('product-modal', true);
-  });
-});
+  const products = [
+    { id: 1, name: "CM Protection Plus", price: "$49.99", status: "Active" },
+    { id: 2, name: "CM Protection Basic", price: "$29.99", status: "Active" },
+    { id: 3, name: "CM Protection Enterprise", price: "$69.99", status: "Inactive" }
+  ];
 
-// Tab navigation
-function setActiveTab(tabId) {
-  // Update tab content
-  const tabContents = document.querySelectorAll('.tab-content');
-  tabContents.forEach(tab => {
-    tab.classList.remove('active');
-  });
-  
-  const activeTab = document.getElementById(`${tabId}-tab`);
-  if (activeTab) {
-    activeTab.classList.add('active');
-  }
-  
-  // Update navigation buttons
-  const navButtons = document.querySelectorAll('.nav-button[data-tab]');
-  navButtons.forEach(button => {
-    button.classList.remove('active');
-    if (button.getAttribute('data-tab') === tabId) {
-      button.classList.add('active');
-    }
-  });
-  
-  // Close mobile menu after navigation
-  const sidebar = document.querySelector('.sidebar');
-  if (window.innerWidth < 768) {
-    sidebar.classList.remove('active');
-    
-    // Reset mobile toggle icon
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    mobileMenuToggle.innerHTML = '';
-    const newIcon = document.createElement('i');
-    newIcon.setAttribute('data-lucide', 'menu');
-    mobileMenuToggle.appendChild(newIcon);
-    lucide.createIcons();
-  }
-}
-
-// Mock data for users
-let users = [
-  { id: 1, username: "admin", email: "admin@cmstore.com", role: "Admin" },
-  { id: 2, username: "moderator", email: "mod@cmstore.com", role: "Moderator" },
-  { id: 3, username: "user1", email: "user1@example.com", role: "User" }
-];
-
-// Mock data for products
-let products = [
-  { id: 1, name: "Premium Access", price: "$49.99", status: "Active" },
-  { id: 2, name: "Basic Package", price: "$19.99", status: "Active" },
-  { id: 3, name: "Bundle Deal", price: "$79.99", status: "Inactive" }
-];
-
-let currentUserId = null;
-let currentProductId = null;
-
-// Initialize users table
-function initUsers() {
-  const tableBody = document.getElementById('users-table-body');
-  tableBody.innerHTML = '';
-  
+  // Populate users table
+  const usersTableBody = document.getElementById("users-table-body");
   users.forEach(user => {
-    const row = document.createElement('tr');
-    
+    const row = document.createElement("tr");
     row.innerHTML = `
       <td>${user.id}</td>
       <td>${user.username}</td>
       <td>${user.email}</td>
       <td>${user.role}</td>
-      <td class="actions-cell">
-        <button class="action-button edit-user" data-id="${user.id}">
-          <i data-lucide="edit"></i>
-        </button>
-        <button class="action-button delete delete-user" data-id="${user.id}">
-          <i data-lucide="trash"></i>
-        </button>
+      <td>
+        <button class="btn-edit" data-id="${user.id}">Edit</button>
+        <button class="btn-delete" data-id="${user.id}">Delete</button>
       </td>
     `;
-    
-    tableBody.appendChild(row);
+    usersTableBody.appendChild(row);
   });
-  
-  // Initialize icons
-  lucide.createIcons();
-  
-  // Add event listeners
-  const editButtons = document.querySelectorAll('.edit-user');
-  editButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const userId = parseInt(button.getAttribute('data-id'));
-      editUser(userId);
-    });
-  });
-  
-  const deleteButtons = document.querySelectorAll('.delete-user');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const userId = parseInt(button.getAttribute('data-id'));
-      deleteUser(userId);
-    });
-  });
-}
 
-// Initialize products table
-function initProducts() {
-  const tableBody = document.getElementById('products-table-body');
-  tableBody.innerHTML = '';
-  
+  // Populate products table
+  const productsTableBody = document.getElementById("products-table-body");
   products.forEach(product => {
-    const row = document.createElement('tr');
-    
+    const row = document.createElement("tr");
     row.innerHTML = `
       <td>${product.id}</td>
       <td>${product.name}</td>
       <td>${product.price}</td>
+      <td><span class="status-${product.status.toLowerCase()}">${product.status}</span></td>
       <td>
-        <span class="status-badge ${product.status.toLowerCase()}">${product.status}</span>
-      </td>
-      <td class="actions-cell">
-        <button class="action-button edit-product" data-id="${product.id}">
-          <i data-lucide="edit"></i>
-        </button>
-        <button class="action-button delete delete-product" data-id="${product.id}">
-          <i data-lucide="trash"></i>
-        </button>
+        <button class="btn-edit" data-id="${product.id}">Edit</button>
+        <button class="btn-delete" data-id="${product.id}">Delete</button>
       </td>
     `;
-    
-    tableBody.appendChild(row);
+    productsTableBody.appendChild(row);
   });
-  
-  // Initialize icons
-  lucide.createIcons();
-  
-  // Add event listeners
-  const editButtons = document.querySelectorAll('.edit-product');
-  editButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = parseInt(button.getAttribute('data-id'));
-      editProduct(productId);
-    });
+
+  // Modal functionality
+  const userModal = document.getElementById("user-modal");
+  const productModal = document.getElementById("product-modal");
+  const addUserBtn = document.getElementById("add-user-btn");
+  const addProductBtn = document.getElementById("add-product-btn");
+  const cancelUserBtn = document.getElementById("cancel-user-btn");
+  const cancelProductBtn = document.getElementById("cancel-product-btn");
+  const userForm = document.getElementById("user-form");
+  const productForm = document.getElementById("product-form");
+
+  // Add user button
+  addUserBtn.addEventListener("click", function() {
+    document.getElementById("user-modal-title").textContent = "Add User";
+    userModal.classList.add("show");
   });
-  
-  const deleteButtons = document.querySelectorAll('.delete-product');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = parseInt(button.getAttribute('data-id'));
-      deleteProduct(productId);
-    });
+
+  // Add product button
+  addProductBtn.addEventListener("click", function() {
+    document.getElementById("product-modal-title").textContent = "Add Product";
+    productModal.classList.add("show");
   });
-}
 
-// Edit user
-function editUser(userId) {
-  const user = users.find(u => u.id === userId);
-  if (!user) return;
-  
-  currentUserId = userId;
-  
-  document.getElementById('user-modal-title').textContent = 'Edit User';
-  document.getElementById('username').value = user.username;
-  document.getElementById('email').value = user.email;
-  document.getElementById('role').value = user.role;
-  
-  toggleModal('user-modal', true);
-}
+  // Cancel buttons
+  cancelUserBtn.addEventListener("click", function() {
+    userModal.classList.remove("show");
+  });
 
-// Edit product
-function editProduct(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) return;
-  
-  currentProductId = productId;
-  
-  document.getElementById('product-modal-title').textContent = 'Edit Product';
-  document.getElementById('product-name').value = product.name;
-  document.getElementById('price').value = product.price;
-  document.getElementById('status').value = product.status;
-  
-  toggleModal('product-modal', true);
-}
+  cancelProductBtn.addEventListener("click", function() {
+    productModal.classList.remove("show");
+  });
 
-// Delete user
-function deleteUser(userId) {
-  users = users.filter(user => user.id !== userId);
-  initUsers();
-  showToast('User deleted successfully');
-}
-
-// Delete product
-function deleteProduct(productId) {
-  products = products.filter(product => product.id !== productId);
-  initProducts();
-  showToast('Product deleted successfully');
-}
-
-// Handle user form submission
-function handleUserSubmit(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(e.target);
-  const userData = {
-    username: formData.get('username'),
-    email: formData.get('email'),
-    role: formData.get('role')
-  };
-  
-  if (currentUserId) {
-    // Update existing user
-    users = users.map(user => {
-      if (user.id === currentUserId) {
-        return { ...user, ...userData };
+  // Edit buttons
+  document.querySelectorAll(".btn-edit").forEach(button => {
+    button.addEventListener("click", function() {
+      const id = this.getAttribute("data-id");
+      
+      if (this.closest("#users-table-body")) {
+        document.getElementById("user-modal-title").textContent = "Edit User";
+        userModal.classList.add("show");
+      } else if (this.closest("#products-table-body")) {
+        document.getElementById("product-modal-title").textContent = "Edit Product";
+        productModal.classList.add("show");
       }
-      return user;
+      
+      // In a real app, you would fetch the data for the specific ID here
+      showToast(`Editing item #${id}`);
     });
-    showToast('User updated successfully');
-  } else {
-    // Add new user
-    const newUser = {
-      id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
-      ...userData
-    };
-    users.push(newUser);
-    showToast('User added successfully');
-  }
-  
-  initUsers();
-  toggleModal('user-modal', false);
-}
+  });
 
-// Handle product form submission
-function handleProductSubmit(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(e.target);
-  const productData = {
-    name: formData.get('name'),
-    price: formData.get('price'),
-    status: formData.get('status')
-  };
-  
-  if (currentProductId) {
-    // Update existing product
-    products = products.map(product => {
-      if (product.id === currentProductId) {
-        return { ...product, ...productData };
-      }
-      return product;
+  // Delete buttons
+  document.querySelectorAll(".btn-delete").forEach(button => {
+    button.addEventListener("click", function() {
+      const id = this.getAttribute("data-id");
+      showToast(`Deleted item #${id}`);
+      // In a real app, you would send a delete request and remove the row
     });
-    showToast('Product updated successfully');
-  } else {
-    // Add new product
-    const newProduct = {
-      id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
-      ...productData
-    };
-    products.push(newProduct);
-    showToast('Product added successfully');
-  }
-  
-  initProducts();
-  toggleModal('product-modal', false);
-}
+  });
 
-// Toggle modal
-function toggleModal(modalId, show) {
-  const modal = document.getElementById(modalId);
-  if (show) {
-    modal.classList.add('active');
-  } else {
-    modal.classList.remove('active');
-  }
-}
-
-// Show toast notification
-function showToast(message) {
-  const toast = document.getElementById('toast');
-  const toastContent = toast.querySelector('.toast-content');
-  
-  toastContent.textContent = message;
-  toast.classList.remove('hidden');
-  
-  // Auto hide after 3 seconds
-  setTimeout(() => {
-    toast.classList.add('hidden');
-  }, 3000);
-}
-
-// Add anti-save protection
-function enableAntiSaveProtection() {
-  // Disable right-click
-  document.addEventListener('contextmenu', (e) => {
+  // Form submissions
+  userForm.addEventListener("submit", function(e) {
     e.preventDefault();
-    return false;
+    userModal.classList.remove("show");
+    showToast("User saved successfully");
   });
-  
-  // Disable keyboard shortcuts
-  document.addEventListener('keydown', (e) => {
-    // Prevent Ctrl+S, Command+S
-    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-      e.preventDefault();
-      return false;
-    }
-    
-    // Prevent F12 key (developer tools)
-    if (e.key === 'F12') {
-      e.preventDefault();
-      return false;
-    }
-  });
-}
 
-// Enable protection
-enableAntiSaveProtection();
+  productForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    productModal.classList.remove("show");
+    showToast("Product saved successfully");
+  });
+
+  // Toast functionality
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    const toastContent = document.querySelector(".toast-content");
+    
+    toastContent.textContent = message;
+    toast.classList.remove("hidden");
+    
+    setTimeout(() => {
+      toast.classList.add("hidden");
+    }, 3000);
+  }
+
+  // Click outside modal to close
+  window.addEventListener("click", function(e) {
+    if (e.target === userModal) {
+      userModal.classList.remove("show");
+    }
+    if (e.target === productModal) {
+      productModal.classList.remove("show");
+    }
+  });
+});

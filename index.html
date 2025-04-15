@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,27 +46,6 @@
             </div>
         </section>
     </main>
-
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-content">
-            <h2>Product Management</h2>
-            <form id="productForm">
-                <input type="text" id="productName" placeholder="Product Name" required>
-                <input type="number" id="productPrice" placeholder="Price (£)" step="0.01" required>
-                <input type="number" id="productStock" placeholder="Stock" required>
-                <select id="productCategory" required>
-                    <option value="custom">Custom Designs</option>
-                    <option value="discord">Discord Services</option>
-                    <option value="dev">Development Resources</option>
-                </select>
-                <textarea id="productDescription" placeholder="Product Description" required></textarea>
-                <button type="submit">Add Product</button>
-            </form>
-            <div id="productsList" class="products-list">
-                <!-- Existing products will be listed here -->
-            </div>
-        </div>
-    </div>
 
     <script src="store.js"></script>
 </body>
